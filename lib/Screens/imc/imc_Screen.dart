@@ -1,6 +1,6 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
+import 'package:form_validator/form_validator.dart';
 import 'package:contador_returns/screens/imc/imc_Screen_Controller.dart';
 
 class Imc_Screen extends StatefulWidget {
@@ -98,8 +98,9 @@ class _FormImcState extends State<FormImc> {
           child: Column(
             children: [
               TextFormField(
+                autovalidateMode: AutovalidateMode.always,
                 validator: (value) {
-                  if (value == null || value == '') {
+                  if (value == null || value.isEmpty) {
                     return 'Insira algo';
                   }
                   return null;
@@ -107,9 +108,7 @@ class _FormImcState extends State<FormImc> {
               ),
               ElevatedButton(
                 onPressed: () {
-                  if (_formChave.currentState == null) {
-                    log('_formChave é nullo');
-                  }
+                  if (_formChave.currentState!.validate()) {}
                 },
                 child: const Text('Enviar'),
               ),

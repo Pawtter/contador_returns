@@ -1,7 +1,7 @@
-import 'package:contador_returns/Screens/Home/home_Screen.dart';
-import 'package:contador_returns/Screens/contador/contador_Screen.dart';
+import 'package:contador_returns/screens/home/home_Screen.dart';
+import 'package:contador_returns/screens/contador/contador_Screen.dart';
 import 'package:flutter/material.dart';
-import 'package:contador_returns/Screens/imc/imc_Screen.dart';
+import 'package:contador_returns/screens/imc/imc_Screen.dart';
 
 void main() {
   runApp(MyApp());
