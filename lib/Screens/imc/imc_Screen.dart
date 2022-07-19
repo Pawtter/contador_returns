@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:contador_returns/Screens/imc/imc_Screen_Controller.dart';
 
@@ -106,11 +108,7 @@ class _FormImcState extends State<FormImc> {
               ElevatedButton(
                 onPressed: () {
                   if (_formChave.currentState != null) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Calculando!'),
-                      ),
-                    );
+                    log('_formChave não é nullo');
                   }
                 },
                 child: const Text('Enviar'),
