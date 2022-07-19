@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:contador_returns/Screens/imc/imc_Screen_Controller.dart';
+import 'package:contador_returns/screens/imc/imc_Screen_Controller.dart';
 
 class Imc_Screen extends StatefulWidget {
   Imc_Screen({Key? key}) : super(key: key);
@@ -107,8 +107,8 @@ class _FormImcState extends State<FormImc> {
               ),
               ElevatedButton(
                 onPressed: () {
-                  if (_formChave.currentState != null) {
-                    log('_formChave não é nullo');
+                  if (_formChave.currentState == null) {
+                    log('_formChave é nullo');
                   }
                 },
                 child: const Text('Enviar'),
