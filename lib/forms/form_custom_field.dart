@@ -23,7 +23,7 @@ class CustomFormField extends StatelessWidget {
 }
 
 extension CheckNum on String {
-  bool get isValidEmail {
+  bool get isValid {
     final emailRegExp = RegExp("\d{2,3}\.\d{,2}");
     return emailRegExp.hasMatch(this);
   }
