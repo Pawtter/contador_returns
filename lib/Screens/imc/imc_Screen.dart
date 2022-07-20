@@ -1,6 +1,5 @@
-import 'dart:developer';
 import 'package:flutter/material.dart';
-import 'package:form_validator/form_validator.dart';
+import 'package:contador_returns/forms/form_custom_field.dart';
 import 'package:contador_returns/screens/imc/imc_Screen_Controller.dart';
 
 class Imc_Screen extends StatefulWidget {
@@ -38,84 +37,27 @@ class FormImc extends StatefulWidget {
 }
 
 class _FormImcState extends State<FormImc> {
-  final _formChave = GlobalKey<_FormImcState>();
-  int valorIMC = 0;
-  String gordo = 'Entre com os valores nos campos abaixo e aperte o botão.';
+  final _formKey = GlobalKey<_FormImcState>();
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Text(gordo),
-        Padding(
-          padding: const EdgeInsets.all(15.0),
-          //  child: Form(
-          //    key: _formChave,
-          //    child: Column(
-          //      children: [
-          //        TextFormField(
-          //          //decoration: const InputDecoration(
-          //          //    icon: Icon(Icons.height),
-          //          //    hintText: 'Insira sua altura.',
-          //          //    labelText: 'Altura'),
-          //          validator: ((textoInserido) {
-          //            if (textoInserido == null || textoInserido.isEmpty) {
-          //              return 'Insira algum valor numérico';
-          //            }
-          //            return null;
-          //          }),
-          //        ),
-          //        TextFormField(
-          //          //decoration: const InputDecoration(
-          //          //    icon: Icon(Icons.fastfood),
-          //          //    hintText: 'Insira seu peso.',
-          //          //    labelText: 'Peso'),
-          //          validator: ((textoInserido) {
-          //            if (textoInserido == null || textoInserido.isEmpty) {
-          //              return 'Insira algum valor numérico';
-          //            }
-          //            return null;
-          //          }),
-          //        ),
-          //        ElevatedButton(
-          //          onPressed: () {
-          //            setState(() {
-          //              if (_formChave.currentState == null) {
-          //                gordo == 'Tudo Vazio';
-          //              } else {
-          //                gordo == 'Valores inseridos';
-          //              }
-          //            });
-          //          },
-          //          child: const Text('Calcular!'),
-          //        ),
-          //      ],
-          //    ),
-          //  ),
-        ),
-        Form(
-          key: _formChave,
-          child: Column(
-            children: [
-              TextFormField(
-                autovalidateMode: AutovalidateMode.always,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Insira algo';
-                  }
-                  return null;
-                },
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  if (_formChave.currentState!.validate()) {}
-                },
-                child: const Text('Enviar'),
-              ),
-            ],
+    return Form(
+      key: _formKey,
+      child: Column(
+        children: [
+          CustomFormField(
+            hintText: 'Insira sua Altura',
+            validator: (valor) {
+              if (!valor.CheckNum) {
+                return 'Campo Obrigatório.';
+              }
+            },
           ),
-        ),
-      ],
+          ElevatedButton(
+            onPressed: () {},
+            child: const Text('Enviar'),
+          ),
+        ],
+      ),
     );
   }
 }
