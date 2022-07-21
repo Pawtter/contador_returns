@@ -47,6 +47,7 @@ class _FormImcState extends State<FormImc> {
   num resultadoImc = 0;
   num altura = 0;
   num peso = 0;
+  String threshold = 'Insira o valor e inicie o calculo.';
 
   @override
   void dispose() {
@@ -115,6 +116,15 @@ class _FormImcState extends State<FormImc> {
                   //log('$altura Altura');
                   //log('$peso Peso');
                   resultadoImc = cImc.imc(altura, peso);
+                  if (resultadoImc >= 40) {
+                    threshold = 'Gigante';
+                  } else if (resultadoImc >= 25) {
+                    threshold = 'Gordin';
+                  } else if (resultadoImc >= 18.5) {
+                    threshold = 'Saudável';
+                  } else {
+                    threshold = 'Magrelo';
+                  }
                   //log('$resultadoImc É o resultado');
                 }
               });
@@ -129,9 +139,16 @@ class _FormImcState extends State<FormImc> {
             style: const TextStyle(
                 fontWeight: FontWeight.bold, color: Colors.teal, fontSize: 45),
           ),
-          const Text(
-            'r=(altura/peso)^2',
-            style: TextStyle(color: Colors.black26),
+          //const Text(
+          //  'r=(altura/peso)^2',
+          //  style: TextStyle(color: Colors.black26),
+          //),
+          const SizedBox(
+            height: 25,
+          ),
+          Text(
+            threshold,
+            style: const TextStyle(fontSize: 25),
           ),
         ],
       ),
