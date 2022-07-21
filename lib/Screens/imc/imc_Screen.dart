@@ -1,9 +1,10 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-//import 'package:contador_returns/forms/form_custom_field.dart';
 import 'package:contador_returns/screens/imc/imc_Screen_Controller.dart';
 import 'package:flutter/services.dart';
+
+CalcularIMC cImc = new CalcularIMC();
 
 class Imc_Screen extends StatefulWidget {
   Imc_Screen({Key? key}) : super(key: key);
@@ -43,9 +44,9 @@ class _FormImcState extends State<FormImc> {
   final _formKey = new GlobalKey<FormState>();
   final myControllerAltura = new TextEditingController();
   final myControllerPeso = new TextEditingController();
-  double resultadoImc = 0;
-  double altura = 0;
-  double peso = 0;
+  num resultadoImc = 0;
+  num altura = 0;
+  num peso = 0;
 
   @override
   void dispose() {
@@ -64,13 +65,14 @@ class _FormImcState extends State<FormImc> {
             padding: const EdgeInsets.all(16.0),
             child: TextFormField(
               controller: myControllerAltura,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                   hintText: 'Insira sua Altura (em centímetros)'),
               inputFormatters: [
                 FilteringTextInputFormatter.allow(
                     RegExp(r'[0-9]+[,.]{0,1}[0-9]*'))
               ],
-              keyboardType: TextInputType.numberWithOptions(decimal: true),
+              keyboardType:
+                  const TextInputType.numberWithOptions(decimal: true),
               onChanged: (value) {
                 altura = double.parse(value);
               },
@@ -87,12 +89,13 @@ class _FormImcState extends State<FormImc> {
             child: TextFormField(
               controller: myControllerPeso,
               decoration:
-                  InputDecoration(hintText: 'Insira seu Peso (em kilos)'),
+                  const InputDecoration(hintText: 'Insira seu Peso (em kilos)'),
               inputFormatters: [
                 FilteringTextInputFormatter.allow(
                     RegExp(r'[0-9]+[,.]{0,1}[0-9]*'))
               ],
-              keyboardType: TextInputType.numberWithOptions(decimal: true),
+              keyboardType:
+                  const TextInputType.numberWithOptions(decimal: true),
               onChanged: (value) {
                 peso = double.parse(value);
               },
@@ -108,23 +111,30 @@ class _FormImcState extends State<FormImc> {
             onPressed: () {
               setState(() {
                 if (_formKey.currentState!.validate()) {
-                  log('processando');
-                  log(altura.toString() + ' Altura');
-                  log(peso.toString() + ' Peso');
-                  resultadoImc = Imc(altura, peso);
-                  log(resultadoImc.toString() + ' É o resultado');
+                  //log('processando');
+                  //log('$altura Altura');
+                  //log('$peso Peso');
+                  resultadoImc = cImc.imc(altura, peso);
+                  //log('$resultadoImc É o resultado');
                 }
               });
             },
             child: const Text('Enviar'),
           ),
-          Text(resultadoImc.toString()),
+          const SizedBox(
+            height: 25,
+          ),
+          Text(
+            '>$resultadoImc<',
+            style: const TextStyle(
+                fontWeight: FontWeight.bold, color: Colors.teal, fontSize: 45),
+          ),
+          const Text(
+            'r=(altura/peso)^2',
+            style: TextStyle(color: Colors.black26),
+          ),
         ],
       ),
     );
   }
-}
-
-double Imc(double a, double p) {
-  return a / p;
 }
