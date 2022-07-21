@@ -67,7 +67,7 @@ class _FormImcState extends State<FormImc> {
             child: TextFormField(
               controller: myControllerAltura,
               decoration: const InputDecoration(
-                  hintText: 'Insira sua Altura (em centímetros)'),
+                  hintText: 'Insira sua Altura (em metros)'),
               inputFormatters: [
                 FilteringTextInputFormatter.allow(
                     RegExp(r'[0-9]+[,.]{0,1}[0-9]*'))
