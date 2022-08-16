@@ -1,6 +1,7 @@
 import 'package:contador_returns/screens/contador/contador_Screen.dart';
 import 'package:flutter/material.dart';
 import 'package:contador_returns/screens/imc/imc_Screen.dart';
+//import 'package:contador_returns/screens/imc/imc_resultado.dart';
 
 void main() {
   runApp(MyApp());
@@ -35,6 +36,7 @@ class _RootPageState extends State<RootPage> {
       routes: {
         '/': (context) => Contador_Screen(),
         '/segundaPagina': (context) => Imc_Screen(),
+        //'/resultadoIMC': (context) => Imc_Resultado(),
       },
     );
     //return Scaffold(

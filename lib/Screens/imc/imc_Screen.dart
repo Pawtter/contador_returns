@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:contador_returns/screens/imc/imc_Screen_Controller.dart';
 import 'package:flutter/services.dart';
+import 'package:contador_returns/screens/imc/imc_resultado.dart';
 
 CalcularIMC cImc = new CalcularIMC();
 
@@ -111,11 +112,12 @@ class _FormImcState extends State<FormImc> {
           ElevatedButton(
             onPressed: () {
               setState(() {
+                altura = num.parse(myControllerAltura.text);
+                peso = num.parse(myControllerPeso.text);
                 if (_formKey.currentState!.validate()) {
-                  //log('processando');
-                  //log('$altura Altura');
-                  //log('$peso Peso');
-                  resultadoImc = cImc.imc(altura, peso);
+                  log('processando');
+                  log('$altura Altura');
+                  log('$peso Peso');
                   if (resultadoImc >= 40) {
                     threshold = 'Gigante';
                   } else if (resultadoImc >= 25) {
@@ -125,7 +127,16 @@ class _FormImcState extends State<FormImc> {
                   } else {
                     threshold = 'Magrelo';
                   }
-                  //log('$resultadoImc É o resultado');
+                  log('$resultadoImc É o resultado');
+                  resultadoImc = cImc.imc(altura, peso);
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Imc_Resultado(
+                          textoResultado: threshold,
+                          resultadoImc: resultadoImc,
+                        ),
+                      ));
                 }
               });
             },
@@ -135,9 +146,9 @@ class _FormImcState extends State<FormImc> {
             height: 25,
           ),
           Text(
-            '>$resultadoImc<',
+            'IMC anterior: >$resultadoImc<',
             style: const TextStyle(
-                fontWeight: FontWeight.bold, color: Colors.teal, fontSize: 45),
+                fontWeight: FontWeight.bold, color: Colors.teal, fontSize: 25),
           ),
           //const Text(
           //  'r=(altura/peso)^2',
@@ -146,9 +157,9 @@ class _FormImcState extends State<FormImc> {
           const SizedBox(
             height: 25,
           ),
-          Text(
-            threshold,
-            style: const TextStyle(fontSize: 25),
+          const Text(
+            'Insira os valores e aperte o botão "enviar"',
+            style: const TextStyle(fontSize: 15),
           ),
         ],
       ),
